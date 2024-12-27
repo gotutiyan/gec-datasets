@@ -2,6 +2,12 @@
 
 This library is to handle datasets of Grammatical Error Correction.
 
+# Install
+
+```sh
+pip install gec-datasets
+```
+
 
 # Usage
 ```python
