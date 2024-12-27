@@ -1,0 +1,22 @@
+[project]
+name = "gec-datasets"
+version = "0.1.0"
+description = "A tools to easily load Grammatical Error Correction datasets."
+readme = "README.md"
+authors = [
+    { name = "gotuiyan" }
+]
+requires-python = ">=3.11.0"
+dependencies = [
+    "gecommon>=0.1.0",
+    "requests>=2.32.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+]
