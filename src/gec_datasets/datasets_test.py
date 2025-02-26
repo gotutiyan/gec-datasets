@@ -1,5 +1,6 @@
 import pytest
 from gec_datasets import GECDatasets
+import itertools
 
 cases = [
     ("conll14", 1312, 2),
@@ -15,7 +16,16 @@ cases = [
     ("cweb-s-dev", 2862, 2),
     ("bea19-test", 4477, 0),
     ("bea19-dev", 4384, 1),
-    ("wi_locness-train", 34308, 1),
+    ("wi-locness-train", 34308, 1),
+    ("troy-1bw-train", 1172689, 1),
+    ("troy-1bw-dev", 23933, 1),
+    ("troy-blogs-train", 1244011, 1),
+    ("troy-blogs-dev", 25388, 1),
+    ("pie-synthetic-a1", 8865347, 1),
+    ("pie-synthetic-a2", 8865347, 1),
+    ("pie-synthetic-a3", 8865347, 1),
+    ("pie-synthetic-a4", 8865347, 1),
+    ("pie-synthetic-a5", 8865347, 1),
 ]
 
 
@@ -29,5 +39,10 @@ class TestGECDatasets:
         data = gec.load(data_id)
         assert len(data.srcs) == num_sents
         assert len(data.refs) == num_refs
-        for ref in data.refs:
-            assert len(ref) == num_sents
+        if data_id != 'bea19-test':
+            sent_lists = [data.srcs] + data.refs
+            for s1, s2 in itertools.combinations(sent_lists, 2):
+                # source and references have the same number of sentences.
+                assert len(s1) == len(s2)
+                # Check that src and refs are being read from diffent files.
+                assert any([ss1 != ss2 for ss1, ss2 in zip(s1, s2)])

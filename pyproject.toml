@@ -1,6 +1,6 @@
 [project]
 name = "gec-datasets"
-version = "0.1.0"
+version = "0.1.1"
 description = "A tools to easily load Grammatical Error Correction datasets."
 readme = "README.md"
 authors = [
@@ -8,9 +8,13 @@ authors = [
 ]
 requires-python = ">=3.11.0"
 dependencies = [
+    "gdown>=5.2.0",
     "gecommon>=0.1.0",
     "requests>=2.32.3",
 ]
+
+[project.scripts]
+gecdatasets-download = "gec_datasets.cli.download:cli_main"
 
 [build-system]
 requires = ["hatchling"]

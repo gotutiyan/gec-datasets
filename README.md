@@ -10,6 +10,8 @@ pip install gec-datasets
 
 
 # Usage
+
+### API
 ```python
 from gec_datasets import GECDatasets
 gec = GECDatasets(
@@ -27,6 +29,14 @@ assert len(conll14.refs) == 2
 assert len(conll14.refs[0]) == 1312
 assert len(conll14.refs[1]) == 1312
 ```
+
+### CLI
+You can specify multiple ids of the data you want to download in the `--ids` field.
+
+```sh
+gecdatasets-download --base_path "datasets/" --ids conll14 conll13
+```
+
 
 The dataset is stored under `base_path=`.  
 The first time it is downloaded automatically, and thereafter it is loaded from the saved files.
@@ -65,6 +75,16 @@ datasets/
 |'bea19-test'|BEA-2019 shared task test set [[Bryant+ 2019]](https://aclanthology.org/W19-4406/).|
 |'bea19-dev'|BEA-2019 shared task development set [[Bryant+ 2019]](https://aclanthology.org/W19-4406/). It contains only source sentences.|
 |'wi-locness-train'|W&I+LOCNESS training set [[Yannakoudakis+ 2018]](https://www.cl.cam.ac.uk/~hy260/WI-cefr.pdf).|
+
+The following is synthetic data.
+
+|ID `.load(ID)`|Description|
+|:--|:--|
+|'troy-1bw-train'|Synthetic data based on the One Billion Words Benchmark for distillation [[Tarnavskyi,+ 2022]](https://aclanthology.org/2022.acl-long.266/).|
+|'troy-1bw-dev'|Another split of the synthetic data based on the One Billion Words Benchmark for distillation [[Tarnavskyi,+ 2022]](https://aclanthology.org/2022.acl-long.266/).|
+|'troy-blogs-train'|Synthetic data based on the Blog Authorship Corpus for distillation [[Tarnavskyi,+ 2022]](https://aclanthology.org/2022.acl-long.266/).|
+|'troy-blogs-dev'|Another split of the synthetic data based on the Blog Authorship Corpus for distillation [[Tarnavskyi,+ 2022]](https://aclanthology.org/2022.acl-long.266/).|
+|'pie-synthetic-a1'|Synthetic data based on the One Billion Words Benchmark [[Awasthi+ 19]](https://aclanthology.org/D19-1435/). You can also specify `a2`, `a3`, `a4`, and `a5`. [This attachment](https://aclanthology.org/attachments/D19-1435.Attachment.pdf) describes how to make synthetic errors.|
 
 ### Non-public datasets
 

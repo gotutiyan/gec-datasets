@@ -26,9 +26,12 @@ class GECDatasets:
             "fce": self.download_fce,
             "jfleg": self.download_jfleg,
             "cweb": self.download_cweb,
-            "wi_locness": self.download_wi_locness,
+            "wi-locness": self.download_wi_locness,
             "nucle": self.download_nucle,
             "lang8": self.download_lang8,
+            "troy-1bw": self.download_troy_1bw,
+            "troy-blogs": self.download_troy_blogs,
+            "pie-synthetic": self.download_pie_synthetic
         }
         if data_id in download_functions:
             download_functions[data_id]()
@@ -42,7 +45,11 @@ class GECDatasets:
         src_file = data_path / "src.txt"
         if not src_file.exists():
             # E.g., "jfleg-test" -> "jfleg"
-            self.download(data_id.split("-")[0])
+            key = data_id
+            if 'pie-synthetic' in key:
+                key = key[:-3]  # remove `-a1`
+            key = key.replace('-test', '').replace('-dev', '').replace('-train', '')
+            self.download(key)
 
         if not src_file.exists():
             raise FileNotFoundError(f"Source file not found: {src_file}")
@@ -132,7 +139,7 @@ class GECDatasets:
         shutil.copy(src_file, data_path / "src.txt")
 
     def download_wi_locness(self):
-        data_id_train = "wi_locness-train"
+        data_id_train = "wi-locness-train"
         data_path = self.base_path / data_id_train
         url = "https://www.cl.cam.ac.uk/research/nl/bea2019st/data/wi+locness_v2.1.bea19.tar.gz"
         self.download_and_extract(url, data_path)
@@ -308,3 +315,125 @@ class GECDatasets:
         m2_file = data_path / "lang8.train.auto.bea19.m2"
         self.m2_to_src(m2_file, data_path / "src.txt")
         self.m2_to_raw(m2_file, 0, data_path / "ref0.txt")
+
+    def download_troy_1bw(self):
+        data_id_train = "troy-1bw-train"
+        data_path_train = self.base_path / data_id_train
+        data_path_train.mkdir(parents=True, exist_ok=True)
+
+        download_path = data_path_train / 'Troy-1BW.zip'
+        if not download_path.exists():
+            subprocess.run(
+                [
+                    "gdown",
+                    "--fuzzy",
+                    "https://drive.google.com/file/d/1aaUGLGyV3lxIbX2CIt0qw0_UM7nQUrhx/view?usp=drive_link",
+                    "-O",
+                    download_path
+                ],
+                check=True,
+            )
+            subprocess.run(
+                [
+                    "unzip",
+                    download_path,
+                    "-d",
+                    data_path_train,
+                ]
+            )
+        shutil.copy(
+            data_path_train / "new_1bw/train_source", data_path_train / "src.txt"
+        )
+        shutil.copy(
+            data_path_train / "new_1bw/train_target", data_path_train / "ref0.txt"
+        )
+
+        data_id_dev = "troy-1bw-dev"
+        data_path_dev = self.base_path / data_id_dev
+        data_path_dev.mkdir(parents=True, exist_ok=True)
+        shutil.copy(
+            data_path_train / "new_1bw/test_source", data_path_dev / "src.txt"
+        )
+        shutil.copy(
+            data_path_train / "new_1bw/test_target", data_path_dev / "ref0.txt"
+        )
+
+    def download_troy_blogs(self):
+        data_id_train = "troy-blogs-train"
+        data_path_train = self.base_path / data_id_train
+        data_path_train.mkdir(parents=True, exist_ok=True)
+
+        download_path = data_path_train / 'Troy-Blogs.zip'
+        if not download_path.exists():
+            subprocess.run(
+                [
+                    "gdown",
+                    "--fuzzy",
+                    "https://drive.google.com/file/d/1sKCxtx2k41WIdshyjQjo_gIAAbB1LWNs/view?usp=drive_link",
+                    "-O",
+                    download_path
+                ],
+                check=True,
+            )
+            subprocess.run(
+                [
+                    "unzip",
+                    download_path,
+                    "-d",
+                    data_path_train,
+                ]
+            )
+        shutil.copy(
+            data_path_train / "blogs/train_src", data_path_train / "src.txt"
+        )
+        shutil.copy(
+            data_path_train / "blogs/train_tgt", data_path_train / "ref0.txt"
+        )
+
+        data_id_dev = "troy-blogs-dev"
+        data_path_dev = self.base_path / data_id_dev
+        data_path_dev.mkdir(parents=True, exist_ok=True)
+        shutil.copy(
+            data_path_train / "blogs/dev_src", data_path_dev / "src.txt"
+        )
+        shutil.copy(
+            data_path_train / "blogs/dev_tgt", data_path_dev / "ref0.txt"
+        )
+
+    def download_pie_synthetic(self):
+        data_id = "pie-synthetic-a1"
+        data_path = self.base_path / data_id
+        data_path.mkdir(parents=True, exist_ok=True)
+
+        download_path = data_path / 'synthetic.zip'
+        if not download_path.exists():
+            subprocess.run(
+                [
+                    "gdown",
+                    "--fuzzy",
+                    "https://drive.google.com/file/d/1bl5reJ-XhPEfEaPjvO45M7w0yN-0XGOA/view",
+                    "-O",
+                    download_path
+                ],
+                check=True,
+            )
+            subprocess.run(
+                [
+                    "unzip",
+                    download_path,
+                    "-d",
+                    data_path,
+                ]
+            )
+        for name in ['a1', 'a2', 'a3', 'a4', 'a5']:
+            data_id_this = f"pie-synthetic-{name}"
+            data_path_this = self.base_path / data_id_this
+            data_path_this.mkdir(parents=True, exist_ok=True)
+            shutil.copy(
+                data_path / f"{name}/{name}_train_incorr_sentences.txt",
+                data_path_this / "src.txt"
+            )
+            shutil.copy(
+                data_path / f"{name}/{name}_train_corr_sentences.txt",
+                data_path_this / "ref0.txt"
+            )
