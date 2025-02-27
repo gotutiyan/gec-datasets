@@ -33,23 +33,20 @@ class GECDatasets:
             "troy-blogs": self.download_troy_blogs,
             "pie-synthetic": self.download_pie_synthetic
         }
-        if data_id in download_functions:
-            download_functions[data_id]()
-        else:
-            raise ValueError(
-                f"The data_id={data_id} is invalid. It should be in: {list(download_functions.keys())}."
-            )
+        for d in download_functions.keys():
+            if d in data_id:
+                download_functions[d]()
+                return
+        raise ValueError(
+            f"The data_id={data_id} is invalid. It should be in: {list(download_functions.keys())}."
+        )
 
     def load(self, data_id: str) -> GECData:
         data_path = self.base_path / data_id
         src_file = data_path / "src.txt"
         if not src_file.exists():
             # E.g., "jfleg-test" -> "jfleg"
-            key = data_id
-            if 'pie-synthetic' in key:
-                key = key[:-3]  # remove `-a1`
-            key = key.replace('-test', '').replace('-dev', '').replace('-train', '')
-            self.download(key)
+            self.download(data_id)
 
         if not src_file.exists():
             raise FileNotFoundError(f"Source file not found: {src_file}")
