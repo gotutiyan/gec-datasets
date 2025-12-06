@@ -31,10 +31,10 @@ class GECDatasets:
             "lang8": self.download_lang8,
             "troy-1bw": self.download_troy_1bw,
             "troy-blogs": self.download_troy_blogs,
-            "pie-synthetic": self.download_pie_synthetic
+            "pie-synthetic": self.download_pie_synthetic,
         }
         for d in download_functions.keys():
-            if d in data_id:
+            if d in data_id:  # E.g., "jfleg" in "jfleg-dev"
                 download_functions[d]()
                 return
         raise ValueError(
@@ -45,7 +45,6 @@ class GECDatasets:
         data_path = self.base_path / data_id
         src_file = data_path / "src.txt"
         if not src_file.exists():
-            # E.g., "jfleg-test" -> "jfleg"
             self.download(data_id)
 
         if not src_file.exists():
@@ -198,13 +197,13 @@ class GECDatasets:
             )
 
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-S.dev.source", data_path_s_dev / "src.txt"
+            cweb_repo_path / "data/tokenized/CWEB-S.dev.tok.source", data_path_s_dev / "src.txt"
         )
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-S.dev.ann1", data_path_s_dev / "ref0.txt"
+            cweb_repo_path / "data/tokenized/CWEB-S.dev.tok.ann1", data_path_s_dev / "ref0.txt"
         )
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-S.dev.ann2", data_path_s_dev / "ref1.txt"
+            cweb_repo_path / "data/tokenized/CWEB-S.dev.tok.ann2", data_path_s_dev / "ref1.txt"
         )
 
         data_id_s_test = "cweb-s-test"
@@ -212,13 +211,13 @@ class GECDatasets:
         data_path_s_test.mkdir(parents=True, exist_ok=True)
 
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-S.test.source", data_path_s_test / "src.txt"
+            cweb_repo_path / "data/tokenized/CWEB-S.test.tok.source", data_path_s_test / "src.txt"
         )
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-S.test.ann1", data_path_s_test / "ref0.txt"
+            cweb_repo_path / "data/tokenized/CWEB-S.test.tok.ann1", data_path_s_test / "ref0.txt"
         )
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-S.test.ann2", data_path_s_test / "ref1.txt"
+            cweb_repo_path / "data/tokenized/CWEB-S.test.tok.ann2", data_path_s_test / "ref1.txt"
         )
 
         data_id_g_dev = "cweb-g-dev"
@@ -226,13 +225,13 @@ class GECDatasets:
         data_path_g_dev.mkdir(parents=True, exist_ok=True)
 
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-G.dev.source", data_path_g_dev / "src.txt"
+            cweb_repo_path / "data/tokenized/CWEB-G.dev.tok.source", data_path_g_dev / "src.txt"
         )
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-G.dev.ann1", data_path_g_dev / "ref0.txt"
+            cweb_repo_path / "data/tokenized/CWEB-G.dev.tok.ann1", data_path_g_dev / "ref0.txt"
         )
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-G.dev.ann2", data_path_g_dev / "ref1.txt"
+            cweb_repo_path / "data/tokenized/CWEB-G.dev.tok.ann2", data_path_g_dev / "ref1.txt"
         )
 
         data_id_g_test = "cweb-g-test"
@@ -240,13 +239,13 @@ class GECDatasets:
         data_path_g_test.mkdir(parents=True, exist_ok=True)
 
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-G.test.source", data_path_g_test / "src.txt"
+            cweb_repo_path / "data/tokenized/CWEB-G.test.tok.source", data_path_g_test / "src.txt"
         )
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-G.test.ann1", data_path_g_test / "ref0.txt"
+            cweb_repo_path / "data/tokenized/CWEB-G.test.norm.tok.ann1", data_path_g_test / "ref0.txt"
         )
         shutil.copy(
-            cweb_repo_path / "data/raw/CWEB-G.test.ann2", data_path_g_test / "ref1.txt"
+            cweb_repo_path / "data/tokenized/CWEB-G.test.tok.ann2", data_path_g_test / "ref1.txt"
         )
 
     def download_fce(self):
