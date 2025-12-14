@@ -15,7 +15,7 @@ pip install gec-datasets
 ```python
 from gec_datasets import GECDatasets
 gec = GECDatasets(
-    base_path='datasets/'
+    base_path='gec_datasets_base/'
 )
 conll14 = gec.load('conll14')
 
@@ -30,19 +30,32 @@ assert len(conll14.refs[0]) == 1312
 assert len(conll14.refs[1]) == 1312
 ```
 
+Available ids can be found by:
+```python
+import gec_datasets
+print(gec_datasets.available())
+```
+
 ### CLI
 You can specify multiple ids of the data you want to download in the `--ids` field.
 
 ```sh
-gecdatasets-download --base_path "datasets/" --ids conll14 conll13
+gecdatasets-download --base_path "gec_datasets_base/" --ids conll14 bea19-dev
+```
+
+Available ids can be found by:
+```sh
+gecdatasets-available
 ```
 
 
-The dataset is stored under `base_path=`.  
+In both API and CLI, datasets will be stored under `base_path=`.  
 The first time it is downloaded automatically, and thereafter it is loaded from the saved files.
 
+When you call `gec.load('sample')`, gec-datasets simply refers to `<base_path>/'sample'/{src.txt|ref0.txt|...}`.
+
 ```
-datasets/
+gec_datasets_base/
 ├── conll14
 │   ├── ref0.txt
 │   ├── ref1.txt
@@ -97,12 +110,12 @@ The following is synthetic data.
 
 - Request data from [HERE](https://www.cl.cam.ac.uk/research/nl/bea2019st/).
 - You will receive an email with release3.3.tar.bz2 attached.
-- `mkdir <base_path>/nucle-train/` and put the data as ` <base_path>/nucle-train/release3.3.tar.bz2`.
+- `mkdir <base_path>/nucle/` and put the data as ` <base_path>/nucle/release3.3.tar.bz2`.
 - You can now use the data with `.load("nucle-train")`. The data will be extracted automatically.
 
 ### lang8-train
 
 - Request data from [HERE](https://www.cl.cam.ac.uk/research/nl/bea2019st/).
 - You will receive an email titled "[NAIST Lang-8 Corpus of Learner English for the 14th BEA Shared Task]".
-- `mkdir <base_path>/lang8-train/` and put the data as `<base_path>/lang8-train/lang8.bea19.tar.gz`.
+- `mkdir <base_path>/lang8/` and put the data as `<base_path>/lang8/lang8.bea19.tar.gz`.
 - You can now use the data with `.load("lang8-train")`. The data will be extracted automatically.
