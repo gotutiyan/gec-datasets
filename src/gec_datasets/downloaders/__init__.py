@@ -10,6 +10,15 @@ from .lang8 import DownloaderLang8BEA19
 from .troy_1bw import DownloaderTroy1BW
 from .troy_blogs import DownloaderTroyBlogs
 from .pie_synthetic import DownloaderPIESynthetic
+from .unlp2023 import DownloaderUNLP2023
+from .akces_gec import DownloaderAKCESGEC
+from .geccc import DownloaderGECCC
+from .falko_merlin import DownloaderFalkoMerlin
+from .loru_gec import DownloaderLORuGEC
+from .ronacc import DownloaderRONACC
+from .k_nct import DownloaderKNCT
+from .kor import DownloaderKor
+from .hi_gec import DownloaderHiGEC
 
 def get_downloader_list():
     return [
@@ -23,5 +32,14 @@ def get_downloader_list():
         DownloaderLang8BEA19,
         DownloaderTroy1BW,
         DownloaderTroyBlogs,
-        DownloaderPIESynthetic
+        DownloaderPIESynthetic,
+        DownloaderUNLP2023,
+        DownloaderAKCESGEC,
+        DownloaderGECCC,
+        DownloaderFalkoMerlin,
+        DownloaderLORuGEC,
+        DownloaderRONACC,
+        DownloaderKNCT,
+        DownloaderKor,
+        DownloaderHiGEC
     ]

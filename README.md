@@ -70,52 +70,58 @@ gec_datasets_base/
 
 # Supported datasets
 
+Basically, `gec-datasets` automatically handles everything, including downloading datasets. However, some non-public datasets require manual file downloads.
+
+
 ### Public datasets
 
-|ID `.load(ID)`|Description|
-|:--|:--|
-|'conll13'|CoNLL-2013 test set [[Ng+ 2013]](https://aclanthology.org/W13-3601/).|
-|'conll14'|CoNLL-2014 test set [[Ng+ 2014]](https://aclanthology.org/W14-1701/).|
-|'jfleg-test'|JFLEG test set [[Napoles+ 2017]](https://aclanthology.org/E17-2037/).|
-|'jfleg-dev'|JFLEG development set [[Napoles+ 2017]](https://aclanthology.org/E17-2037/).|
-|'fce-test'|FCE test set [[Yannakoudakis+ 2011]](https://aclanthology.org/P11-1019/)|
-|'fce-dev'|FCE development set [[Yannakoudakis+ 2011]](https://aclanthology.org/P11-1019/).|
-|'fce-train'|FCE training set [[Yannakoudakis+ 2011]](https://aclanthology.org/P11-1019/).|
-|'cweb-g-test'|CWEB-G test set [[Flachs+ 2020]](https://aclanthology.org/2020.emnlp-main.680/).|
-|'cweb-g-dev'|CWEB-G development set [[Flachs+ 2020]](https://aclanthology.org/2020.emnlp-main.680/).|
-|'cweb-s-test'|CWEB-S test set [[Flachs+ 2020]](https://aclanthology.org/2020.emnlp-main.680/).|
-|'cweb-s-dev'|CWEB-S development set [[Flachs+ 2020]](https://aclanthology.org/2020.emnlp-main.680/).|
-|'bea19-test'|BEA-2019 shared task test set [[Bryant+ 2019]](https://aclanthology.org/W19-4406/).|
-|'bea19-dev'|BEA-2019 shared task development set [[Bryant+ 2019]](https://aclanthology.org/W19-4406/). It contains only source sentences.|
-|'wi-locness-train'|W&I+LOCNESS training set [[Yannakoudakis+ 2018]](https://www.cl.cam.ac.uk/~hy260/WI-cefr.pdf).|
+|ID `.load(ID)`|Language|Description|Instructions (if non-public data)|
+|:--|:--|:--|:--|
+|'conll13'|English|CoNLL-2013 test set [[Ng+ 2013]](https://aclanthology.org/W13-3601/).||
+|'conll14'|English|CoNLL-2014 test set [[Ng+ 2014]](https://aclanthology.org/W14-1701/).||
+|'jfleg-dev'<br>'jfleg-test'|English|JFLEG dataset [[Napoles+ 2017]](https://aclanthology.org/E17-2037/).||
+|'fce-train'<br>'fce-dev'<br>'fce-test'|English|FCE dataset [[Yannakoudakis+ 2011]](https://aclanthology.org/P11-1019/)||
+|'cweb-g-dev'<br>'cweb-g-test'|English|CWEB-G dataset [[Flachs+ 2020]](https://aclanthology.org/2020.emnlp-main.680/).||
+|'cweb-s-dev'<br>'cweb-s-test'|English|CWEB-S dataset [[Flachs+ 2020]](https://aclanthology.org/2020.emnlp-main.680/).||
+|'bea19-dev'<br>'bea19-test'|English|BEA-2019 shared task test set [[Bryant+ 2019]](https://aclanthology.org/W19-4406/). The test set contains only source sentences.||
+|'wi-locness-train'|English|W&I+LOCNESS training set [[Yannakoudakis+ 2018]](https://www.cl.cam.ac.uk/~hy260/WI-cefr.pdf).||
+|'nucle-train'|English|NUCLE training set. [[Dahlmeier+ 2013]](https://aclanthology.org/W13-1703/)|Request data from [HERE](https://www.cl.cam.ac.uk/research/nl/bea2019st/), then put the data as `<base_path>/nucle/release3.3.tar.bz2`. After that, you can `.load(nucle-train)`.|
+|'lang8-train'|English|Lang-8 training set. [[Mizumoto+ 2012]](https://aclanthology.org/C12-2084/) [[Tajiri+ 2012]](https://aclanthology.org/P12-2039/)|Request data from [HERE](https://www.cl.cam.ac.uk/research/nl/bea2019st/). You will receive an email titled "[NAIST Lang-8 Corpus of Learner English for the 14th BEA Shared Task]", and put the data as `<base_path>/lang8/lang8.bea19.tar.gz`. After that, you can now use the data with `.load("lang8-train")`.|
+|'unlp2023-gec-only-train'<br>'unlp2023-gec-only-dev'<br>'unlp2023-gec-fluency-train'<br>'unlp2023-gec-fluency-dev'|Ukrainian|UNLP-2023 Shared Task [[Syvokon+ 23]](https://aclanthology.org/2023.unlp-1.16/).||
+|'akces-gec-train'<br>'akces-gec-dev'<br>'akces-gec-test'|Czech|AKCES-GEC [[Náplava+ 19]](https://aclanthology.org/D19-5545/). |Download `AKCES-GEC.zip` from [HERE](https://lindat.mff.cuni.cz/repository/items/ba5f9011-0282-4dff-bddd-6d30e518caeb) and put it as `<base_path>/akces-gec/AKCES-GEC.zip`. After that, you can `.load('akces-gec-xxx')`.|
+|'geccc-sentence-train'<br>'geccc-sentence-dev'<br>'geccc-sentence-test'<br>'geccc-paragraph-train'<br>'geccc-paragraph-dev'<br>'geccc-paragraph-test'|Czech|GECCC dataset [[Náplava+ 22]](https://aclanthology.org/2022.tacl-1.26/)||
+|'falko-merlin-train'<br>'falko-merlin-dev'<br>'falko-merlin-test'|German|Falko-Merlin [[Boyd+ 18]](https://aclanthology.org/W18-6111/)||
+|'loru-gec-dev'<br>'loru-gec-test'|Russian|LORuGEC dataset [[Sorokin+ 25]](https://aclanthology.org/2025.bea-1.38/)||
+|'ronacc-train'<br>'ronacc-dev'<br>'ronacc-test'|Romain|RONACC dataset [[Cotet+ 20]](https://ieeexplore.ieee.org/abstract/document/9288338)||
+|'k-nct-test'|Korean|K-NCT dataset [[Koo+ 23]](https://ieeexplore.ieee.org/abstract/document/9938990)||
+|'kor-learner-train'<br>'kor-learner-dev'<br>'kor-learner-test'<br>'kor-native-train'<br>'kor-native-dev'<br>'kor-native-test'|Korean|Kor-learner, Kor-native datsets [[Yoon+ 23]](https://aclanthology.org/2023.acl-long.371/)|Send a request from [This Form](https://docs.google.com/forms/d/e/1FAIpQLSfewjAmqcrKF5GDYuIWOfyMVBI3FN6tCwI8jalzQNhGoVAlRg/viewform) and download `Preprocessed/` directory from the google drive. Then, put it as `<base_path>/kor/Preprocessed.zip`. After that, you can `.load('kor-xxx')`|
+|'hi-gec-train'<br>'hi-gec-dev'<br>'hi-gec-test'|Hindi|Hi-GEC dataset [[Sharma+ 25]](https://aclanthology.org/2025.coling-main.406/)||
 
 The following is synthetic data.
 
-|ID `.load(ID)`|Description|
-|:--|:--|
-|'troy-1bw-train'|Synthetic data based on the One Billion Words Benchmark for distillation [[Tarnavskyi,+ 2022]](https://aclanthology.org/2022.acl-long.266/).|
-|'troy-1bw-dev'|Another split of the synthetic data based on the One Billion Words Benchmark for distillation [[Tarnavskyi,+ 2022]](https://aclanthology.org/2022.acl-long.266/).|
-|'troy-blogs-train'|Synthetic data based on the Blog Authorship Corpus for distillation [[Tarnavskyi,+ 2022]](https://aclanthology.org/2022.acl-long.266/).|
-|'troy-blogs-dev'|Another split of the synthetic data based on the Blog Authorship Corpus for distillation [[Tarnavskyi,+ 2022]](https://aclanthology.org/2022.acl-long.266/).|
-|'pie-synthetic-a1'|Synthetic data based on the One Billion Words Benchmark [[Awasthi+ 19]](https://aclanthology.org/D19-1435/). You can also specify `a2`, `a3`, `a4`, and `a5`. [This attachment](https://aclanthology.org/attachments/D19-1435.Attachment.pdf) describes how to make synthetic errors.|
+|ID `.load(ID)`|Language|Description|
+|:--|:--|:--|
+|'troy-1bw-train'<br>'troy-1bw-dev'|English|Synthetic data based on the One Billion Words Benchmark for distillation [[Tarnavskyi,+ 2022]](https://aclanthology.org/2022.acl-long.266/).|
+|'troy-blogs-dev'<br>'troy-blogs-train'|English|Synthetic data based on the Blog Authorship Corpus for distillation [[Tarnavskyi,+ 2022]](https://aclanthology.org/2022.acl-long.266/).|
+|'pie-synthetic-a1'<br>'pie-synthetic-a2'<br>'pie-synthetic-a3'<br>'pie-synthetic-a4'<br>'pie-synthetic-a5'|English|Synthetic data based on the One Billion Words Benchmark [[Awasthi+ 19]](https://aclanthology.org/D19-1435/). [This attachment](https://aclanthology.org/attachments/D19-1435.Attachment.pdf) describes how to make synthetic errors.|
 
-### Non-public datasets
 
-|ID `.load(ID)`|Description|
-|:--|:--|
-|'nucle-train'|NUCLE training set. [[Dahlmeier+ 2013]](https://aclanthology.org/W13-1703/)|
-|'lang8-train'|Lang-8 training set. [[Mizumoto+ 2012]](https://aclanthology.org/C12-2084/) [[Tajiri+ 2012]](https://aclanthology.org/P12-2039/)|
+# Add your custom data
 
-### nucle-train
+The `.load("ID")` method simply references files in the format `<base_path>/"ID"/{src.txt|ref0.txt|ref1.txt|...|refN.txt}`. Custom datasets can be loaded by simply placing files in a directory following this format. Note that the source file must be named exactly `src.txt`, and reference files must follow the strict 0-indexed naming convention `refN.txt`.
 
-- Request data from [HERE](https://www.cl.cam.ac.uk/research/nl/bea2019st/).
-- You will receive an email with release3.3.tar.bz2 attached.
-- `mkdir <base_path>/nucle/` and put the data as ` <base_path>/nucle/release3.3.tar.bz2`.
-- You can now use the data with `.load("nucle-train")`. The data will be extracted automatically.
+For better reproducibility, you can also download datasets from remote sources. In this case, you can define your own downloader class as described in [.src/gec_datasets/downloaders/](.src/gec_datasets/downloaders/). The role of a downloader class is to automate the entire workflow of downloading data from a remote source and renaming or copying files into the required format: `<base_path>/ID/{src.txt|ref0.txt|ref1.txt|...|refN.txt}`.
 
-### lang8-train
+A custom downloader class becomes available by passing it to the `custom_downloaders=` argument.  
+In the example below, the existing `DownloaderCoNLL2014` is treated as if it were a custom class and passed to the `custom_downloaders=` argument.
 
-- Request data from [HERE](https://www.cl.cam.ac.uk/research/nl/bea2019st/).
-- You will receive an email titled "[NAIST Lang-8 Corpus of Learner English for the 14th BEA Shared Task]".
-- `mkdir <base_path>/lang8/` and put the data as `<base_path>/lang8/lang8.bea19.tar.gz`.
-- You can now use the data with `.load("lang8-train")`. The data will be extracted automatically.
+```python
+from gec_datasets import GECDatasets
+from gec_datasets.downloaders.conll14 import DownloaderCoNLL2014
+gec = GECDatasets(
+    base_path='gec_datasets_base/',
+    custom_downloaders=[DownloaderCoNLL2014]
+)
+gec.available()[-1]
+'conll14'
+```
