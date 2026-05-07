@@ -12,7 +12,7 @@ def cli_main():
 
 def get_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--base_path', required=True)
+    parser.add_argument('--base_path', default='gec_datasets_base/')
     parser.add_argument('--ids', nargs='+', required=True)
     args = parser.parse_args()
     return args

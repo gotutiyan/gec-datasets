@@ -1,8 +1,9 @@
 import gec_datasets
 import argparse
+import pprint
 
 def main():
-    print(gec_datasets.available())
+    pprint.pprint(gec_datasets.available())
 
 def cli_main():
     main()
